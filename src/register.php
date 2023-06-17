@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -12,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Passwords do not match.';
     } else {
         if ($auth->registerUser($username, $password)) {
-            header('Location: login.php');
+            header('Location: index.php');
             exit;
         } else {
             $error = 'Failed to create the user account.';

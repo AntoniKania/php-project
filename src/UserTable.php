@@ -12,12 +12,12 @@ class UserTable {
 
     public function addUser($username, $hashedPassword, $salt, $role): bool
     {
-        $query = "INSERT INTO user (username, password, salt) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO user (username, password, salt, role) VALUES (?, ?, ?, ?)";
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute([$username, $hashedPassword, $salt, $role]);
     }
 
-    public function getUserByUsername($username): bool
+    public function getUserByUsername($username): ?array
     {
         $query = "SELECT * FROM user WHERE username = ?";
         $stmt = $this->pdo->prepare($query);

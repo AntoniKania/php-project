@@ -28,12 +28,12 @@ class Auth {
         $salt = self::generateSalt();
         $hashedPassword = self::hashPassword($password, $salt);
 
-        $status = $this->userTable->addUser($username, $hashedPassword, $salt, $role);
+        $this->userTable->addUser($username, $hashedPassword, $salt, $role);
 
         $createdUser = $this->userTable->getUserByUsername($username);
         $this->setSession($createdUser);
 
-        return $status;
+        return isset($createdUser);
     }
 
     public function authenticateUser($username, $password): bool
@@ -48,7 +48,6 @@ class Auth {
 
             if (password_verify($passwordWithSalt, $storedHashedPassword)) {
                 $this->setSession($userFromDb);
-                echo "login successful";
                 return true;
             }
         }
@@ -71,7 +70,6 @@ class Auth {
 
     private function setSession($userFromDb): void
     {
-        $_SESSION['user_id'] = $userFromDb['userId'];
         $_SESSION['username'] = $userFromDb['username'];
         $_SESSION['role'] = $userFromDb['role'];
     }

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include_once 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -6,8 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     if ($auth->authenticateUser($username, $password)) {
-        // Redirect to the home page or any other authenticated area
-        header('Location: home.php');
+        header('Location: index.php');
         exit;
     } else {
         $error = 'Invalid username or password.';

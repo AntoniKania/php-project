@@ -3,7 +3,7 @@ session_start();
 
 require_once 'config.php';
 
-$auth->registerUser("test3", "test2");
+//$auth->registerUser("test3", "test2");
 
 if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
@@ -26,7 +26,7 @@ if (isset($_SESSION['user_id'])) {
         <ul>
             <li><a href="index.php">Home</a></li>
             <li><a href="contact.php">Contact</a></li>
-            <?php if (isset($_SESSION['user_id'])): ?>
+            <?php if (isset($_SESSION['username'])): ?>
                 <?php if ($userRole === 'admin'): ?>
                     <li><a href="manage_users.php">Manage Users</a></li>
                     <li><a href="view_logs.php">View Logs</a></li>
