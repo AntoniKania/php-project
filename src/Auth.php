@@ -6,14 +6,38 @@ class Auth {
     public function __construct(UserTable $userTable) {
         $this->userTable = $userTable;
     }
-    public function registerUser($username, $password) {
+
+    public function isLoggedIn(): bool
+    {
+        return isset($_SESSION['user_id']);
+    }
+
+    public function getRole(): ?string
+    {
+        return $_SESSION['role'] ?? null;
+    }
+
+    public function registerUser($username, $password): bool
+    {
+        return $this->registerUserWithGivenRole($username, $password, UserTable::$USER);
+    }
+
+    // should be visible only from administrator panel
+    public function registerUserWithGivenRole($username, $password, $role): bool
+    {
         $salt = self::generateSalt();
         $hashedPassword = self::hashPassword($password, $salt);
 
-        $this->userTable->registerUser($username, $hashedPassword, $salt);
+        $status = $this->userTable->addUser($username, $hashedPassword, $salt, $role);
+
+        $createdUser = $this->userTable->getUserByUsername($username);
+        $this->setSession($createdUser);
+
+        return $status;
     }
 
-    public function authenticateUser($username, $password) {
+    public function authenticateUser($username, $password): bool
+    {
         $userFromDb = $this->userTable->getUserByUsername($username);
 
         if ($userFromDb) {
@@ -23,27 +47,32 @@ class Auth {
             $storedHashedPassword = $userFromDb['password'];
 
             if (password_verify($passwordWithSalt, $storedHashedPassword)) {
-                $_SESSION['user_id'] = $userFromDb['userId'];
-                $_SESSION['username'] = $userFromDb['username'];
-                $_SESSION['role'] = $userFromDb['role'];
+                $this->setSession($userFromDb);
                 echo "login successful";
-            } else {
-                echo "Invalid username or password";
+                return true;
             }
-        } else {
-            echo "Invalid username or password";
         }
+        return false;
     }
 
-    private static function hashPassword($password, $salt) {
+    private static function hashPassword($password, $salt): string
+    {
         $passwordWithSalt = $password . $salt; // password_hash() with PASSWORD_ARGON2ID doesn't support salt option
         return password_hash($passwordWithSalt, PASSWORD_ARGON2ID);
     }
 
-    private static function generateSalt() {
+    private static function generateSalt(): string
+    {
         $length = 16;
         $salt = base64_encode(random_bytes($length));
 
         return substr($salt, 0, $length);
+    }
+
+    private function setSession($userFromDb): void
+    {
+        $_SESSION['user_id'] = $userFromDb['userId'];
+        $_SESSION['username'] = $userFromDb['username'];
+        $_SESSION['role'] = $userFromDb['role'];
     }
 }
