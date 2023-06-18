@@ -72,3 +72,22 @@ VALUES ('Fourteenth Post', 'This is the content of the fourteenth post.', 'photo
 
 INSERT INTO blog_post (title, content, photo_filename, publication_date)
 VALUES ('Fifteenth Post', 'This is the content of the fifteenth post.', NULL, '2023-06-15 11:45:00');
+
+
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Great post!', '2023-06-01 12:34:56', 1, 1);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Nice job!', '2023-06-02 09:21:00', 2, 1);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Interesting read.', '2023-06-03 18:45:22', 3, 2);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Thanks for sharing.', '2023-06-04 15:10:30', 4, 2);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Well written!', '2023-06-05 11:55:12', 2, 3);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('I enjoyed this.', '2023-06-06 20:30:45', 1, 3);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Keep up the good work.', '2023-06-07 14:22:18', 3, 4);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Informative post.', '2023-06-08 17:17:29', 4, 4);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('I have a question.', '2023-06-09 10:05:50', 2, 5);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Looking forward to more.', '2023-06-10 19:40:03', 1, 5);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Insightful content.', '2023-06-11 16:15:41', 3, 6);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Well done!', '2023-06-12 13:55:24', 4, 6);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('I learned something new.', '2023-06-13 08:12:09', 2, 7);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Impressive writing style.', '2023-06-14 22:18:37', 1, 7);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('This deserves more attention.', '2023-06-15 12:45:52', 3, 8);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('I can relate to this.', '2023-06-16 17:30:15', 4, 8);
+INSERT INTO comment (content, publication_date, user_id, blog_post_id) VALUES ('Well-explained.', '2023-06-17 09:55:02', 2, 9);

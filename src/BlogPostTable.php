@@ -10,12 +10,25 @@ class BlogPostTable
     {
         $this->pdo = $pdo;
     }
-    public function getPostById($id): ?array
+
+    public function getPostById($id): ?Post
     {
         $query = "SELECT * FROM blog_post WHERE id = ?";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return null;
+        }
+
+        return new Post(
+            $row['id'],
+            $row['title'],
+            $row['content'],
+            $row['photo_filename'],
+            $row['publication_date']
+        );
     }
 
     public function getPosts($numberOfPosts, $startingFrom = 1): ?array
@@ -39,5 +52,37 @@ class BlogPostTable
         }
 
         return $posts;
+    }
+
+    public function getPreviousPostId($postId): ?int
+    {
+        $query = "SELECT id FROM blog_post WHERE id < :postId ORDER BY id DESC LIMIT 1";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':postId', $postId, PDO::PARAM_INT);
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result !== false) {
+            return $result['id'];
+        }
+
+        return null;
+    }
+
+    public function getNextPostId($postId): ?int
+    {
+        $query = "SELECT id FROM blog_post WHERE id > :postId ORDER BY id ASC LIMIT 1";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':postId', $postId, PDO::PARAM_INT);
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result !== false) {
+            return $result['id'];
+        }
+
+        return null;
     }
 }
