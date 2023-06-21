@@ -1,8 +1,8 @@
 <?php
 
-require_once 'config.php';
+require_once '../config.php';
 
-class BlogPostTable
+class PostTable
 {
     private PDO $pdo;
 
@@ -13,7 +13,7 @@ class BlogPostTable
 
     public function getPostById($id): ?Post
     {
-        $query = "SELECT * FROM blog_post WHERE id = ?";
+        $query = "SELECT * FROM post WHERE id = ?";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([$id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -27,13 +27,13 @@ class BlogPostTable
             $row['title'],
             $row['content'],
             $row['photo_filename'],
-            $row['publication_date']
+            new DateTime($row['publication_date'])
         );
     }
 
     public function getPosts($numberOfPosts, $startingFrom = 1): ?array
     {
-        $query = "SELECT * FROM blog_post ORDER BY publication_date ASC LIMIT ? OFFSET ?";
+        $query = "SELECT * FROM post ORDER BY publication_date ASC LIMIT ? OFFSET ?";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([$numberOfPosts, $startingFrom - 1]);
 
@@ -45,7 +45,7 @@ class BlogPostTable
                 $row['title'],
                 $row['content'],
                 $row['photo_filename'],
-                $row['publication_date']
+                new DateTime($row['publication_date'])
             );
 
             $posts[] = $post;
@@ -56,7 +56,7 @@ class BlogPostTable
 
     public function getPreviousPostId($postId): ?int
     {
-        $query = "SELECT id FROM blog_post WHERE id < :postId ORDER BY id DESC LIMIT 1";
+        $query = "SELECT id FROM post WHERE id < :postId ORDER BY id DESC LIMIT 1";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':postId', $postId, PDO::PARAM_INT);
         $statement->execute();
@@ -72,7 +72,7 @@ class BlogPostTable
 
     public function getNextPostId($postId): ?int
     {
-        $query = "SELECT id FROM blog_post WHERE id > :postId ORDER BY id ASC LIMIT 1";
+        $query = "SELECT id FROM post WHERE id > :postId ORDER BY id ASC LIMIT 1";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':postId', $postId, PDO::PARAM_INT);
         $statement->execute();

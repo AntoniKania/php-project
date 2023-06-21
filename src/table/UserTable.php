@@ -17,12 +17,39 @@ class UserTable {
         return $stmt->execute([$username, $hashedPassword, $salt, $role]);
     }
 
-    public function getUserByUsername($username): ?array
+    public function getCredentialsByUsername($username): ?Credentials
     {
-        $query = "SELECT * FROM user WHERE username = ?";
+        $query = "SELECT password, salt FROM user WHERE username = ?";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([$username]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return null;
+        }
+
+        return new Credentials(
+            $row['password'],
+            $row['salt']
+        );
+    }
+    public function getUserByUsername($username): ?User
+    {
+        $query = "SELECT id, username, role FROM user WHERE username = ?";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([$username]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return null;
+        }
+
+        return new User(
+            $row['id'],
+            $row['username'],
+            $row['role']
+        );
+
     }
 
     public function getAllUsers(): ?array

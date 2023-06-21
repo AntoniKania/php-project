@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once 'config.php';
+require_once '../config.php';
 
 if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
@@ -14,11 +14,12 @@ if (isset($_SESSION['user_id'])) {
 /**
  * @var Post[] $posts
  */
-$posts = $blogPostTable->getPosts(10);
+$posts = $postTable->getPosts(10);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="../styles.css">
     <title>Blog</title>
 </head>
 <body>
@@ -44,15 +45,16 @@ $posts = $blogPostTable->getPosts(10);
 
 <main>
     <?php foreach ($posts as $post): ?>
-        <article>
-            <h2><?php echo $post->getTitle(); ?></h2>
-            <p><?php echo $post->getContent(); ?></p>
-            <?php if (!empty($post->getPhotoFilename())): ?>
-                <img src="images/<?php echo $post->getPhotoFilename(); ?>" alt="Post Image">
-            <?php endif; ?>
-            <p>Published on: <?php echo $post->getPublicationDate(); ?></p>
-        </article>
-        <hr>
+        <a href="post.php?id=<?php echo $post->getId(); ?>">
+            <article>
+                <h2><?php echo $post->getTitle(); ?></h2>
+                <p><?php echo $post->getContent(); ?></p>
+                <?php if (!empty($post->getPhotoFilename())): ?>
+                    <img src="images/<?php echo $post->getPhotoFilename(); ?>" alt="Post Image">
+                <?php endif; ?>
+                <p>Published on: <?php echo $post->getPublicationDate()->format(DATE_FORMAT); ?></p>
+            </article>
+        </a>
     <?php endforeach; ?>
 </main>
 

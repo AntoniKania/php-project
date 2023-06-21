@@ -1,6 +1,6 @@
 <?php
 
-class Auth {
+class AuthService {
     private UserTable $userTable;
 
     public function __construct(UserTable $userTable) {
@@ -33,21 +33,21 @@ class Auth {
         $createdUser = $this->userTable->getUserByUsername($username);
         $this->setSession($createdUser);
 
-        return isset($createdUser);
+        return $createdUser != null;
     }
 
     public function authenticateUser($username, $password): bool
     {
-        $userFromDb = $this->userTable->getUserByUsername($username);
+        $credentials = $this->userTable->getCredentialsByUsername($username);
 
-        if ($userFromDb) {
-            $salt = $userFromDb['salt'];
+        if ($credentials) {
+            $salt = $credentials->getSalt();
             $passwordWithSalt = $password . $salt;
 
-            $storedHashedPassword = $userFromDb['password'];
+            $storedHashedPassword = $credentials->getPassword();
 
             if (password_verify($passwordWithSalt, $storedHashedPassword)) {
-                $this->setSession($userFromDb);
+                $this->setSession($this->userTable->getUserByUsername($username));
                 return true;
             }
         }
@@ -68,9 +68,9 @@ class Auth {
         return substr($salt, 0, $length);
     }
 
-    private function setSession($userFromDb): void
+    private function setSession($user): void
     {
-        $_SESSION['username'] = $userFromDb['username'];
-        $_SESSION['role'] = $userFromDb['role'];
+        $_SESSION['username'] = $user->getUsername();
+        $_SESSION['role'] = $user->getRole();
     }
 }

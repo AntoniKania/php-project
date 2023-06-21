@@ -5,8 +5,7 @@ class Post {
     private string $title;
     private string $content;
     private ?string $photoFilename;
-    // todo: change type to Date
-    private string $publicationDate;
+    private DateTime $publicationDate;
 
     public function __construct($id, $title, $content, $photoFilename, $publicationDate) {
         $this->id = $id;
@@ -36,7 +35,7 @@ class Post {
         return $this->photoFilename;
     }
 
-    public function getPublicationDate(): string
+    public function getPublicationDate(): DateTime
     {
         return $this->publicationDate;
     }

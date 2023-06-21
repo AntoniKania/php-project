@@ -1,10 +1,14 @@
 <?php
-require_once 'UserTable.php';
-require_once 'BlogPostTable.php';
-require_once 'CommentTable.php';
-require_once 'Auth.php';
-require_once 'Post.php';
-require_once 'Comment.php';
+require_once 'table/UserTable.php';
+require_once 'table/PostTable.php';
+require_once 'table/CommentTable.php';
+require_once 'service/AuthService.php';
+require_once 'model/Post.php';
+require_once 'model/Comment.php';
+require_once 'model/User.php';
+require_once 'model/Credentials.php';
+
+const DATE_FORMAT = 'j/m/Y H:i:s';
 
 $test = "test";
 $dsn = "mysql:host=db;dbname=myDB";
@@ -17,6 +21,6 @@ $options = [
 
 $pdo = new PDO($dsn, $username, $password, $options);
 $userTable = new UserTable($pdo);
-$blogPostTable = new BlogPostTable($pdo);
-$auth = new Auth($userTable);
+$postTable = new PostTable($pdo);
+$auth = new AuthService($userTable);
 $commentTable = new CommentTable($pdo);
