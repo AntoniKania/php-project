@@ -16,8 +16,8 @@ class CommentTable
                    u.id AS user_id, u.username, u.role,
                    p.id AS post_id, p.title, p.content AS post_content, p.photo_filename, p.publication_date
             FROM comment c 
-            JOIN user u ON c.user_id = u.id
             JOIN post p ON c.post_id = p.id
+            LEFT JOIN user u ON c.user_id = u.id
             WHERE post_id = ?
         ";
         $statement = $this->pdo->prepare($query);
@@ -25,7 +25,7 @@ class CommentTable
 
         $comments = [];
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-            $user = new User($row['user_id'], $row['username'], $row['role']);
+            $user = $row['user_id'] === null ? null : new User($row['user_id'], $row['username'], $row['role']);
 
             $post = new Post(
                 $row['post_id'],
@@ -47,5 +47,15 @@ class CommentTable
         }
 
         return $comments;
+    }
+
+    public function addComment($postId, $userId, $content): bool
+    {
+        $commentDate = date('Y-m-d H:i:s');
+        $userId = $userId == '' ? null : $userId;
+
+        $query = "INSERT INTO comment (content, comment_date, user_id, post_id) VALUES (?, ?, ?, ?)";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([$content, $commentDate, $userId, $postId]);
     }
 }

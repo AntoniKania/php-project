@@ -6,7 +6,7 @@ class Comment {
     private int $id;
     private string $content;
     private DateTime $commentDate;
-    private User $user;
+    private ?User $user;
     private Post $post;
 
     public function __construct($id, $content, $commentDate, $user, $post) {
@@ -32,7 +32,7 @@ class Comment {
         return $this->commentDate;
     }
 
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }
