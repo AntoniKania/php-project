@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-include_once '../config.php';
+require_once '../config.php';
+require_once 'header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -16,12 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
     <title>Login</title>
-</head>
-<body>
 <h2>Login</h2>
 <?php if (isset($error)) : ?>
     <p><?php echo $error; ?></p>
@@ -34,5 +30,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <input type="submit" value="Login">
 </form>
 <p>Don't have an account? <a href="register.php">Create an account</a></p>
-</body>
-</html>
+
+<?php require_once 'footer.php' ?>

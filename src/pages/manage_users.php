@@ -1,5 +1,6 @@
 <?php
 require_once '../config.php';
+require_once 'header.php';
 
 if (!$auth->isLoggedIn() || $auth->getRole() != 'admin') {
     header('Location: login.php');
@@ -75,5 +76,5 @@ $users = $userTable->getAllUsers();
         </tr>
     <?php endforeach; ?>
 </table>
-</body>
-</html>
+
+<?php require_once 'footer.php' ?>
