@@ -70,6 +70,7 @@ class AuthService {
 
     private function setSession($user): void
     {
+        $_SESSION['user_id'] = $user->getId();
         $_SESSION['username'] = $user->getUsername();
         $_SESSION['role'] = $user->getRole();
     }

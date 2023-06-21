@@ -31,7 +31,7 @@ echo '<h3>Comments</h3>';
 <form id="commentForm">
     <textarea name="comment_content" rows="4" cols="40"></textarea>
     <input type="hidden" name="post_id" value="<?php echo $postId; ?>">
-    <input type="hidden" name="user_id" value="<?php echo $_SESSION['userId'] == null ? null : $_SESSION['userId']; ?>">
+    <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] == null ? null : $_SESSION['user_id']; ?>">
     <br>
     <input type="submit" value="Submit Comment">
 </form>
@@ -43,15 +43,15 @@ echo '<h3>Comments</h3>';
     document.getElementById('commentForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
-        var form = e.target;
-        var formData = new FormData(form);
+        let form = e.target;
+        let formData = new FormData(form);
 
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open('POST', '../script/submit_comment.php', true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 console.log(xhr.responseText)
-                var response = JSON.parse(xhr.responseText);
+                let response = JSON.parse(xhr.responseText);
                 if (response.success) {
                     fetchComments();
                 } else {
@@ -63,13 +63,13 @@ echo '<h3>Comments</h3>';
     });
 
     function fetchComments() {
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open('GET', '../script/fetch_comments.php?postId=' + postId, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
+                let response = JSON.parse(xhr.responseText);
                 if (response.success) {
-                    var comments = response.comments;
+                    let comments = response.comments;
                     updateCommentSection(comments);
                 }
             }
@@ -78,23 +78,23 @@ echo '<h3>Comments</h3>';
     }
 
     function updateCommentSection(comments) {
-        var commentSection = document.getElementById('commentSection');
+        let commentSection = document.getElementById('commentSection');
         commentSection.innerHTML = '';
 
         comments.forEach(function(comment) {
             console.log(comment)
-            var commentDiv = document.createElement('div');
+            let commentDiv = document.createElement('div');
 
-            var contentParagraph = document.createElement('p');
+            let contentParagraph = document.createElement('p');
             contentParagraph.textContent = comment.content;
             commentDiv.appendChild(contentParagraph);
 
-            var authorParagraph = document.createElement('p');
+            let authorParagraph = document.createElement('p');
             authorParagraph.textContent = 'Author: ' + comment.username;
             commentDiv.appendChild(authorParagraph);
 
-            var dateParagraph = document.createElement('p');
-            var commentDate = new Date(comment.comment_date);
+            let dateParagraph = document.createElement('p');
+            let commentDate = new Date(comment.comment_date);
             dateParagraph.textContent = 'Date: ' + commentDate.toLocaleString();
             commentDiv.appendChild(dateParagraph);
 

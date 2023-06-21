@@ -2,7 +2,6 @@
 session_start();
 
 require_once '../config.php';
-require_once 'header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -22,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+require_once 'header.php';
 ?>
 <h2>Create Account</h2>
 <?php if (isset($error)) : ?>
