@@ -16,7 +16,6 @@
                 <?php $role = $_SESSION['role']; ?>
                 <?php if ($role === User::$ADMIN): ?>
                     <li><a href="manage_users.php">Manage Users</a></li>
-                    <li><a href="view_logs.php">View Logs</a></li>
                 <?php endif; ?>
                 <?php if ($role === User::$ADMIN || $role === User::$AUTHOR): ?>
                     <li><a href="create_post.php">Create New Post</a></li>

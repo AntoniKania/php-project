@@ -23,10 +23,10 @@ require_once 'header.php';
     <a href="post.php?id=<?php echo $post->getId(); ?>">
         <article>
             <h2><?php echo $post->getTitle(); ?></h2>
-            <p><?php echo $post->getContent(); ?></p>
             <?php if (!empty($post->getPhotoFilename())): ?>
                 <img src="../images/<?php echo $post->getPhotoFilename(); ?>" alt="Post Image">
             <?php endif; ?>
+            <p><?php echo $post->getContent(); ?></p>
             <p>Published on: <?php echo $post->getPublicationDate()->format(DATE_FORMAT); ?></p>
         </article>
     </a>
