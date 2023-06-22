@@ -25,7 +25,7 @@ require_once 'header.php';
             <h2><?php echo $post->getTitle(); ?></h2>
             <p><?php echo $post->getContent(); ?></p>
             <?php if (!empty($post->getPhotoFilename())): ?>
-                <img src="images/<?php echo $post->getPhotoFilename(); ?>" alt="Post Image">
+                <img src="../images/<?php echo $post->getPhotoFilename(); ?>" alt="Post Image">
             <?php endif; ?>
             <p>Published on: <?php echo $post->getPublicationDate()->format(DATE_FORMAT); ?></p>
         </article>

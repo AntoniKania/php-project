@@ -1,9 +1,6 @@
 <?php
 
 class UserTable {
-    public static $USER = "user";
-    public static $AUTHOR = "author";
-    public static $ADMIN = "admin";
     private PDO $pdo;
 
     public function __construct(PDO $pdo) {

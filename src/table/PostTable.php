@@ -76,12 +76,24 @@ class PostTable
         $statement->bindValue(':postId', $postId, PDO::PARAM_INT);
 
         try {
-            $result = $statement->execute();
-            return $result;
+            return $statement->execute();
         } catch (PDOException $e) {
             return false;
         }
     }
+
+    public function createPost($title, $content, $photoFilename): int
+    {
+        $publicationDate = date('Y-m-d H:i:s');
+        $photoFilename = $photoFilename == '' ? null : $photoFilename;
+
+        $query = "INSERT INTO post (title, content, photo_filename, publication_date) VALUES (?, ?, ?, ?)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([$title, $content, $photoFilename, $publicationDate]);
+
+        return $this->pdo->lastInsertId();
+    }
+
 
     public function getPreviousPostId($postId): ?int
     {

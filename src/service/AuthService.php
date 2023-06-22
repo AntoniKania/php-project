@@ -19,7 +19,7 @@ class AuthService {
 
     public function registerUser($username, $password): bool
     {
-        return $this->registerUserWithGivenRole($username, $password, UserTable::$USER);
+        return $this->registerUserWithGivenRole($username, $password, User::$USER);
     }
 
     // should be visible only from administrator panel

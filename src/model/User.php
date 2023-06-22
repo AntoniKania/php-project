@@ -2,6 +2,9 @@
 
 class User
 {
+    public static string $USER = "user";
+    public static string $AUTHOR = "author";
+    public static string $ADMIN = "admin";
     private int $id;
     private string $username;
     private string $role;

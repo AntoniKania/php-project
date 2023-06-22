@@ -26,6 +26,13 @@ function updatePostDOM(post) {
     titleElement.textContent = post.title;
     postContainer.appendChild(titleElement);
 
+    if (post.photoFilename !== null) {
+        let imageElement = document.createElement('img');
+        imageElement.src = "../images/" + post.photoFilename
+        imageElement.setAttribute("alt", "Post Image");
+        postContainer.appendChild(imageElement);
+    }
+
     let contentElement = document.createElement('p');
     contentElement.setAttribute("id", "postContent");
     contentElement.textContent = post.content;

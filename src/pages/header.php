@@ -13,9 +13,13 @@
             <li><a href="index.php">Home</a></li>
             <li><a href="contact.php">Contact</a></li>
             <?php if (isset($_SESSION['username'])): ?>
-                <?php if ($_SESSION['role'] === 'admin'): ?>
+                <?php $role = $_SESSION['role']; ?>
+                <?php if ($role === User::$ADMIN): ?>
                     <li><a href="manage_users.php">Manage Users</a></li>
                     <li><a href="view_logs.php">View Logs</a></li>
+                <?php endif; ?>
+                <?php if ($role === User::$ADMIN || $role === User::$AUTHOR): ?>
+                    <li><a href="create_post.php">Create New Post</a></li>
                 <?php endif; ?>
                 <li><a href="logout.php">Logout</a></li>
             <?php else: ?>
