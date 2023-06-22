@@ -15,6 +15,14 @@ class Post {
         $this->publicationDate = $publicationDate;
     }
 
+    /**
+     * @param string $content
+     */
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
+    }
+
     public function getId(): int
     {
         return $this->id;

@@ -54,6 +54,35 @@ class PostTable
         return $posts;
     }
 
+    public function updateContent(Post $post): bool
+    {
+        $query = "UPDATE post SET content = :content WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
+        $stmt->bindValue(':id', $post->getId(), PDO::PARAM_INT);
+
+        try {
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function deletePostById($postId): bool
+    {
+        $query = "DELETE FROM post WHERE id = :postId";
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue(':postId', $postId, PDO::PARAM_INT);
+
+        try {
+            $result = $statement->execute();
+            return $result;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
     public function getPreviousPostId($postId): ?int
     {
         $query = "SELECT id FROM post WHERE id < :postId ORDER BY id DESC LIMIT 1";

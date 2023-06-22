@@ -1,8 +1,6 @@
 <?php
 session_start();
-
 require_once '../config.php';
-require_once 'header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -15,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Invalid username or password.';
     }
 }
+
+require_once 'header.php';
 ?>
 
     <title>Login</title>
