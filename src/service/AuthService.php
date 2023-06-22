@@ -7,16 +7,6 @@ class AuthService {
         $this->userTable = $userTable;
     }
 
-    public function isLoggedIn(): bool
-    {
-        return isset($_SESSION['user_id']);
-    }
-
-    public function getRole(): ?string
-    {
-        return $_SESSION['role'] ?? null;
-    }
-
     public function registerUser($username, $password): bool
     {
         return $this->registerUserWithGivenRole($username, $password, User::$USER);

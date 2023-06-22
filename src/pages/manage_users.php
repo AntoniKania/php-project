@@ -1,9 +1,9 @@
 <?php
 require_once '../config.php';
-require_once 'header.php';
+session_start();
 
-if (!$auth->isLoggedIn() || $auth->getRole() != 'admin') {
-    header('Location: login.php');
+if ($_SESSION['role'] != User::$ADMIN) {
+    header('Location: unauthorized.php');
     exit;
 }
 
@@ -30,8 +30,12 @@ if (isset($_GET['delete'])) {
     }
 }
 
+/**
+ * @var User[] $users
+ */
 $users = $userTable->getAllUsers();
 
+require_once 'header.php';
 ?>
 
 <!DOCTYPE html>
@@ -70,9 +74,9 @@ $users = $userTable->getAllUsers();
     </tr>
     <?php foreach ($users as $user) : ?>
         <tr>
-            <td><?php echo $user['username']; ?></td>
-            <td><?php echo $user['role']; ?></td>
-            <td><a href="?delete=<?php echo $user['id']; ?>">Delete</a></td>
+            <td><?php echo $user->getUsername(); ?></td>
+            <td><?php echo $user->getRole(); ?></td>
+            <td><a href="?delete=<?php echo $user->getId(); ?>">Delete</a></td>
         </tr>
     <?php endforeach; ?>
 </table>

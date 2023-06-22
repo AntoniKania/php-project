@@ -1,5 +1,7 @@
 <?php
 
+require_once '../config.php';
+
 class UserTable {
     private PDO $pdo;
 
@@ -51,10 +53,21 @@ class UserTable {
 
     public function getAllUsers(): ?array
     {
-        $query = "SELECT * FROM user";
+        $query = "SELECT id, username, role FROM user";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $users = [];
+        foreach ($rows as $row) {
+            $user = new User(
+                $row['id'],
+                $row['username'],
+                $row['role']
+            );
+            $users[] = $user;
+        }
+
+        return $users ?: null;
     }
 
     public function deleteUser($id): bool
