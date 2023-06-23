@@ -42,6 +42,7 @@ function updateCommentSection(comments) {
     comments.forEach(function(comment) {
         console.log(comment)
         let commentDiv = document.createElement('div');
+        commentDiv.setAttribute('class', 'comment')
 
         let contentParagraph = document.createElement('p');
         contentParagraph.textContent = comment.content;

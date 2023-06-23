@@ -33,17 +33,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 require_once 'header.php';
-
 ?>
 
-<form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST" enctype="multipart/form-data">
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title" required>
-    <label for="content">Content:</label>
-    <textarea id="content" name="content" required></textarea>
-    <label for="picture">Picture:</label>
-    <input type="file" id="picture" name="picture">
-    <button type="submit">Create Post</button>
-</form>
+<div class="container">
+    <form action="<?php echo $_SERVER["PHP_SELF"] ?>" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" id="title" name="title" required class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Content:</label>
+            <textarea id="content" name="content" required class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="picture" class="form-label">Picture:</label>
+            <input type="file" id="picture" name="picture" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Create Post</button>
+    </form>
+</div>
 
 <?php require_once 'footer.php' ?>

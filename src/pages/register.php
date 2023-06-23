@@ -24,19 +24,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 require_once 'header.php';
 ?>
-<h2>Create Account</h2>
 <?php if (isset($error)) : ?>
     <p><?php echo $error; ?></p>
 <?php endif; ?>
-<form method="POST" action="">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br><br>
-    <label for="password">Password: (at least 8 characters)</label>
-    <input type="password" id="password" name="password" required><br><br>
-    <label for="confirm_password">Confirm Password:</label>
-    <input type="password" id="confirm_password" name="confirm_password" required><br><br>
-    <input type="submit" value="Create Account">
-</form>
-<p>Already have an account? <a href="login.php">Login</a></p>
+    <div class="container card">
+        <h2>Create Account</h2>
+        <form method="POST" action="<?php echo $_SERVER["PHP_SELF"] ?>" class="common-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password: (at least 8 characters)</label>
+                <input type="password" id="password" name="password" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required class="form-control">
+            </div>
+            <input type="submit" value="Create Account" class="btn btn-primary">
+        </form>
+        <p>Already have an account? <a href="login.php">Login</a></p>
+    </div>
+
 
 <?php require_once 'footer.php' ?>

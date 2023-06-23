@@ -7,26 +7,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //    todo: send email to author?
 //    mail();
 }
+require_once 'header.php';
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Contact</title>
-</head>
-<body>
-<h1>Contact The Author</h1>
-<form method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>">
-    <label for="name">Your Name:</label>
-    <input type="text" id="name" name="name" required><br><br>
-
-    <label for="email">Your Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
-
-    <label for="message">Message:</label>
-    <textarea id="message" name="message" required></textarea><br><br>
-
-    <input type="submit" value="Submit">
-</form>
-</body>
-</html>
+<div class="container card">
+    <h1>Contact The Author</h1>
+    <form method="post" action="<?php echo $_SERVER["PHP_SELF"] ?>" class="common-form">
+        <div class="form-group">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required class="form-control"></textarea>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+</div>
+<?php require_once 'footer.php'; ?>

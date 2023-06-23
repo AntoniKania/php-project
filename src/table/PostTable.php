@@ -54,6 +54,29 @@ class PostTable
         return $posts;
     }
 
+    public function getAllPosts(): ?array
+    {
+        $query = "SELECT * FROM post ORDER BY publication_date";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+
+        $posts = [];
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $post = new Post(
+                $row['id'],
+                $row['title'],
+                $row['content'],
+                $row['photo_filename'],
+                new DateTime($row['publication_date'])
+            );
+
+            $posts[] = $post;
+        }
+
+        return $posts;
+    }
+
     public function updateContent(Post $post): bool
     {
         $query = "UPDATE post SET content = :content WHERE id = :id";

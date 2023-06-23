@@ -1,10 +1,25 @@
+body {
+    background-color: #54817e;
+}
+
 a {
-    color: inherit;
+    color: #064f92;
     text-decoration: none;
 }
 
 a:hover {
-    color:#00A0C6;
+    color: #0684be;
     text-decoration:none;
     cursor:pointer;
+}
+
+.comment {
+    background-color: #f5f5f5;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.comment p {
+    margin-bottom: 5px;
 }
