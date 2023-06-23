@@ -11,6 +11,7 @@ document.getElementById('commentForm').addEventListener('submit', function(e) {
             console.log(xhr.responseText)
             let response = JSON.parse(xhr.responseText);
             if (response.success) {
+                form.reset();
                 fetchComments();
             } else {
                 console.log("Couldn't add data to the comment table")
@@ -54,7 +55,7 @@ function updateCommentSection(comments) {
 
         let dateParagraph = document.createElement('p');
         let commentDate = new Date(comment.comment_date);
-        dateParagraph.textContent = 'Date: ' + commentDate.toLocaleString();
+        dateParagraph.textContent = 'Date: ' + commentDate.toLocaleString("en-UK");
         commentDiv.appendChild(dateParagraph);
 
         commentSection.appendChild(commentDiv);

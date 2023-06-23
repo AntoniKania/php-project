@@ -13,7 +13,7 @@ class PostTable
 
     public function getPostById($id): ?Post
     {
-        $query = "SELECT * FROM post WHERE id = ?";
+        $query = "SELECT id, title, content, photo_filename, CONVERT_TZ(publication_date, '+00:00', '+02:00') AS publication_date FROM post WHERE id = ?";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([$id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@ class PostTable
 
     public function getPosts($numberOfPosts, $startingFrom = 1): ?array
     {
-        $query = "SELECT * FROM post ORDER BY publication_date ASC LIMIT ? OFFSET ?";
+        $query = "SELECT id, title, content, photo_filename, CONVERT_TZ(publication_date, '+00:00', '+02:00') AS publication_date FROM post ORDER BY publication_date ASC LIMIT ? OFFSET ?";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([$numberOfPosts, $startingFrom - 1]);
 
@@ -56,7 +56,7 @@ class PostTable
 
     public function getAllPosts(): ?array
     {
-        $query = "SELECT * FROM post ORDER BY publication_date";
+        $query = "SELECT id, title, content, photo_filename, CONVERT_TZ(publication_date, '+00:00', '+02:00') AS publication_date  FROM post ORDER BY publication_date";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
 

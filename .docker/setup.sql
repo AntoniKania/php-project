@@ -28,71 +28,28 @@ CREATE TABLE comment(
     PRIMARY KEY (id)
 );
 
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('First Post', 'This is the content of the first post.', 'photo1.jpg', '2023-06-01 09:15:00');
+INSERT INTO post (title, content, photo_filename, publication_date) VALUES
+('Exploring the Evolution of Visual Effects in Film', 'The movie industry has witnessed remarkable advancements in visual effects over the years. From the groundbreaking achievements of Stanley Kubrick\'s "2001: A Space Odyssey" to the awe-inspiring computer-generated imagery (CGI) in today\'s blockbusters, this article delves into the evolution of visual effects. We explore the transition from practical effects to digital wizardry and examine the impact these advancements have had on storytelling. By examining case studies and interviewing industry experts, we uncover the artistic and technical challenges faced by filmmakers. From the emergence of CGI to the seamless integration of visual effects, this article provides an in-depth analysis of how visual effects have transformed the movie industry.', 'evolution_of_visual_effects.jpg', NOW()),
+('The Rise of Streaming Platforms: Changing the Face of Movie Distribution', 'In recent years, the movie industry has witnessed a seismic shift in the way films are distributed and consumed. Streaming platforms such as Netflix, Amazon Prime Video, and Disney+ have disrupted traditional distribution models, allowing viewers to access a vast library of movies and TV shows at their convenience. This article explores the impact of streaming platforms on the movie industry, discussing the benefits and challenges they bring. We delve into the changing viewing habits, the rise of original content, and the implications for filmmakers and studios. With the streaming landscape continuously evolving, it is crucial to understand the dynamics reshaping the industry.', 'rise_of_streaming_platforms.jpg', NOW()),
+('Unveiling the Art of Cinematography: Crafting Visual Masterpieces', 'Cinematography plays a vital role in shaping the visual language of movies. It is the art of capturing light, framing shots, and creating visually stunning compositions that evoke emotions and enhance storytelling. In this article, we take a deep dive into the world of cinematography. We explore the techniques employed by cinematographers, the use of lighting and color to convey mood, and the collaboration between directors and cinematographers. Through analyzing iconic scenes and discussing the work of acclaimed cinematographers, we uncover the magic behind crafting visual masterpieces on the silver screen.', 'art_of_cinematography.jpg', NOW()),
+('The Impact of Diversity and Inclusion in Hollywood', 'The movie industry has long been criticized for its lack of diversity and representation. However, in recent years, there has been a significant push for greater inclusion in Hollywood. This article examines the importance of diversity in storytelling and its impact on audiences. We explore the initiatives undertaken to promote diversity both in front of and behind the camera, the challenges faced, and the progress made. By highlighting successful diverse films and the stories they tell, we shed light on the power of representation in shaping a more inclusive and authentic cinematic landscape.', null, NOW()),
+('Film Review: "The Shape of Water"', 'Guillermo del Toro\'s "The Shape of Water" is a visually stunning and emotionally captivating masterpiece. Set against the backdrop of Cold War-era America, the film tells the story of a mute janitor who forms a unique connection with a mysterious amphibious creature. The performances are exceptional, with Sally Hawkins delivering a breathtaking portrayal of vulnerability and strength. The production design and cinematography create a mesmerizing world that blends fantasy and reality seamlessly. With its poignant themes of love, acceptance, and the power of empathy, "The Shape of Water" is a must-see for any cinephile.', null, NOW()),
+('Movie Review: "Parasite"', 'Bong Joon-ho\'s "Parasite" is a genre-defying masterpiece that leaves a lasting impact. "Parasite" is a masterclass in storytelling, blending elements of dark comedy, suspense, and social commentary flawlessly. The ensemble cast delivers exceptional performances, with the film showcasing Bong Joon-ho\'s signature style and his ability to navigate complex themes with nuance. With its thought-provoking narrative, stellar direction, and powerful performances, "Parasite" rightfully earned its place as a landmark in cinema history.', 'parasite_review.jpg', NOW());
 
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Second Post', 'This is the content of the second post.', 'photo2.jpg', '2023-06-02 14:30:00');
+INSERT INTO comment (content, comment_date, user_id, post_id)
+VALUES ('I absolutely loved "The Shape of Water"! The visuals were breathtaking, and the performances were outstanding. Guillermo del Toro is a true visionary.', NOW(), 1, 6);
+INSERT INTO comment (content, comment_date, user_id, post_id)
+VALUES ('I agree! "Parasite" was an incredible film. The way it portrayed class dynamics was both thought-provoking and unsettling.', NOW(), 2, 7);
+INSERT INTO comment (content, comment_date, user_id, post_id)
+VALUES ('I\'m fascinated by the evolution of visual effects in the movie industry. The advancements have truly changed the way stories are told on the big screen.', NOW(), 3, 1);
+INSERT INTO comment (content, comment_date, user_id, post_id)
+VALUES ('Streaming platforms have revolutionized the way we watch movies. I enjoy having access to a vast library of films and shows at my fingertips.', NOW(), 4, 2);
+INSERT INTO comment (content, comment_date, user_id, post_id)
+VALUES ('Cinematography is such a crucial aspect of filmmaking. It\'s amazing how lighting, framing, and composition can evoke emotions and enhance storytelling.', NOW(), 5, 3);
 
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Third Post', 'This is the content of the third post.', NULL, '2023-06-03 18:45:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Fourth Post', 'This is the content of the fourth post.', 'photo3.jpg', '2023-06-04 10:00:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Fifth Post', 'This is the content of the fifth post.', NULL, '2023-06-05 12:30:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Sixth Post', 'This is the content of the sixth post.', 'photo4.jpg', '2023-06-06 15:45:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Seventh Post', 'This is the content of the seventh post.', NULL, '2023-06-07 09:30:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Eighth Post', 'This is the content of the eighth post.', 'photo5.jpg', '2023-06-08 11:45:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Ninth Post', 'This is the content of the ninth post.', NULL, '2023-06-09 14:00:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Tenth Post', 'This is the content of the tenth post.', 'photo6.jpg', '2023-06-10 16:30:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Eleventh Post', 'This is the content of the eleventh post.', NULL, '2023-06-11 10:15:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Twelfth Post', 'This is the content of the twelfth post.', 'photo7.jpg', '2023-06-12 12:45:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Thirteenth Post', 'This is the content of the thirteenth post.', NULL, '2023-06-13 15:00:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Fourteenth Post', 'This is the content of the fourteenth post.', 'photo8.jpg', '2023-06-14 09:30:00');
-
-INSERT INTO post (title, content, photo_filename, publication_date)
-VALUES ('Fifteenth Post', 'This is the content of the fifteenth post.', NULL, '2023-06-15 11:45:00');
-
-
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Great post!', '2023-06-01 12:34:56', 1, 1);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Nice job!', '2023-06-02 09:21:00', 2, 1);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Interesting read.', '2023-06-03 18:45:22', 3, 2);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Thanks for sharing.', '2023-06-04 15:10:30', 4, 2);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Well written!', '2023-06-05 11:55:12', 2, 3);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('I enjoyed this.', '2023-06-06 20:30:45', 1, 3);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Keep up the good work.', '2023-06-07 14:22:18', 3, 4);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Informative post.', '2023-06-08 17:17:29', 4, 4);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('I have a question.', '2023-06-09 10:05:50', 2, 5);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Looking forward to more.', '2023-06-10 19:40:03', 1, 5);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Insightful content.', '2023-06-11 16:15:41', 3, 6);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Well done!', '2023-06-12 13:55:24', 4, 6);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('I learned something new.', '2023-06-13 08:12:09', 2, 7);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Impressive writing style.', '2023-06-14 22:18:37', 1, 7);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('This deserves more attention.', '2023-06-15 12:45:52', 3, 8);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('I can relate to this.', '2023-06-16 17:30:15', 4, 8);
-INSERT INTO comment (content, comment_date, user_id, post_id) VALUES ('Well-explained.', '2023-06-17 09:55:02', 2, 9);
 
 INSERT INTO user (username, password, salt, role) VALUES
+('admin', '$argon2id$v=19$m=65536,t=4,p=1$c1BHRXQzOHpaZldTeElHbw$TKVPi2znGSI2y0YHrk7n/onTHhOGPckw5oJj5GdQv48', 'JERF/V6ymD5CASdv', 'admin'),
 ('john.doe', 'password123', 'abcdef1234567890', 'user'),
 ('jane.smith', 'securepass', 'xyz7890abcdef123', 'user'),
 ('admin', 'adminpass', '1234567890abcdef', 'admin'),

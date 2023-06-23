@@ -12,7 +12,7 @@ class CommentTable
     public function getCommentsByPostId($postId): ?array
     {
         $query = "
-            SELECT c.id, c.content AS comment_content, c.comment_date,
+            SELECT c.id, c.content AS comment_content, CONVERT_TZ(c.comment_date, '+00:00', '+02:00') AS converted_date,
                    u.id AS user_id, u.username, u.role,
                    p.id AS post_id, p.title, p.content AS post_content, p.photo_filename, p.publication_date
             FROM comment c 
@@ -38,7 +38,7 @@ class CommentTable
             $comment = new Comment(
                 $row['id'],
                 $row['comment_content'],
-                new DateTime($row['comment_date']),
+                new DateTime($row['converted_date']),
                 $user,
                 $post
             );

@@ -14,20 +14,19 @@ $comments = $commentTable->getCommentsByPostId($postId);
 $previousPostId = $postTable->getPreviousPostId($postId);
 $nextPostId = $postTable->getNextPostId($postId);
 
-if ($_SESSION['role'] === User::$AUTHOR || $_SESSION['role'] === User::$ADMIN) {
-    echo '<button id="editButton" class="btn btn-primary">Edit Post</button> ';
-    echo '<button id="deleteButton" class="btn btn-danger">Delete Post</button> ';
-}
-
 require_once 'header.php';
 ?>
 <div class="container">
+    <?php if ($_SESSION['role'] === User::$AUTHOR || $_SESSION['role'] === User::$ADMIN):?>
+        <button id="editButton" class="btn btn-primary" style="margin-right: 10px;">Edit Post</button>
+        <button id="deleteButton" class="btn btn-danger">Delete Post</button>
+    <?php endif ?>
     <div id="postContainer" class="card">
         <!--    filled by post.js script -->
     </div>
 
     <h3>Comments</h3>
-    <div id="commentSection" class="card" style="margin-bottom: 20px;">
+    <div id="commentSection" class="container card" style="margin-bottom: 20px;">
         <!--    filled by add_comment.js script -->
     </div>
 

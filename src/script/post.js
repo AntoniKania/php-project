@@ -35,13 +35,15 @@ function updatePostDOM(post) {
 
     let contentElement = document.createElement('p');
     contentElement.setAttribute("id", "postContent");
+    contentElement.setAttribute("class", "container")
     contentElement.textContent = post.content;
     postContainer.appendChild(contentElement);
 
     let publicationDateElement = document.createElement('p');
     let publicationDate = new Date(post.publicationDate);
-    publicationDateElement.textContent = 'Date: ' + publicationDate.toLocaleString();
+    publicationDateElement.textContent = 'Date: ' + publicationDate.toLocaleString("en-UK");
     publicationDateElement.setAttribute("id", "postPublicationDate");
+    publicationDateElement.setAttribute("class", "container");
     postContainer.appendChild(publicationDateElement);
 }
 
